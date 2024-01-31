@@ -1,0 +1,85 @@
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+
+
+public class GradeBookTest {
+	GradeBook Gradebook1;
+	GradeBook Gradebook2;
+
+	@Before
+	public void setUp() throws Exception {
+		Gradebook1 = new GradeBook(5);
+		Gradebook2 = new GradeBook(5);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		Gradebook1 = Gradebook2 = null;
+	}
+
+	@Test
+	public void testAddScore() {
+		Gradebook1.addScore(2);
+		Gradebook1.addScore(5);
+		Gradebook2.addScore(7);
+		Gradebook2.addScore(9);
+		assertTrue(Gradebook1.toString().equals("2.0 5.0 0.0 0.0 0.0 "));
+		assertTrue(Gradebook2.toString().equals("7.0 9.0 0.0 0.0 0.0 "));
+		Gradebook1.addScore(10);
+		Gradebook2.addScore(12);
+		assertTrue(Gradebook1.toString().equals("2.0 5.0 10.0 0.0 0.0 "));
+		assertTrue(Gradebook2.toString().equals("7.0 9.0 12.0 0.0 0.0 "));
+	}
+
+	@Test
+	public void testSum() {
+		Gradebook1.addScore(1);
+		Gradebook1.addScore(10);
+		Gradebook2.addScore(2);
+		Gradebook2.addScore(11);
+
+		assertTrue(Gradebook1.sum() == 11);
+		assertTrue(Gradebook2.sum() == 13);
+	}
+	@Test
+	public void testMinimum() {
+		Gradebook1.addScore(0);
+		Gradebook1.addScore(3);
+		Gradebook1.addScore(6);
+
+		Gradebook2.addScore(1);
+		Gradebook2.addScore(4);
+		Gradebook2.addScore(19);
+
+		assertTrue(Gradebook1.minimum() == 0);
+		assertTrue(Gradebook2.minimum() == 1);
+	}
+	@Test
+	public void testFinalScore() {
+		Gradebook1.addScore(1);
+		Gradebook1.addScore(2);
+		Gradebook1.addScore(3);
+
+		Gradebook2.addScore(4);
+		Gradebook2.addScore(5);
+		Gradebook2.addScore(6);
+
+		assertTrue(Gradebook1.finalScore() == 5);
+		assertTrue(Gradebook2.finalScore() == 11);
+	}
+	@Test
+	public void testGetScoreSize() {
+		System.out.println(Gradebook1.getScoreSize());
+		System.out.println(Gradebook2.getScoreSize());
+		assertTrue(Gradebook1.getScoreSize() == 0);
+		assertTrue(Gradebook2.getScoreSize() == 0);
+	}
+}
